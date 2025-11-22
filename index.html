@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emprendimiento Jóvenes NINIS Perú</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">NINIS Perú</h1>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#talleres">Talleres</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="section hero">
+        <div class="hero-content">
+            <h2>Oportunidades reales para jóvenes NINIS en Perú</h2>
+            <p>Aprende a editar y conducir tu propio podcast con nuestro programa profesional especialmente creado para ayudarte a conseguir trabajo.</p>
+            <a href="#talleres" class="btn">Ver talleres</a>
+        </div>
+    </section>
+
+    <!-- Sección Talleres -->
+    <section id="talleres" class="section">
+        <h2 class="title">Nuestros Talleres</h2>
+        <div class="cards-container">
+            <div class="card" data-target="detalle-edicion">
+                <h3>Edición de Audio</h3>
+                <p>Aprende a manejar software profesional.</p>
+            </div>
+            <div class="card" data-target="detalle-conduccion">
+                <h3>Conducción de Podcast</h3>
+                <p>Desarrolla habilidades de comunicación.</p>
+            </div>
+            <div class="card" data-target="detalle-produccion">
+                <h3>Producción Completa</h3>
+                <p>Desde la idea hasta el producto final.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Beneficios -->
+    <section id="beneficios" class="section">
+        <h2 class="title">Beneficios del Programa</h2>
+        <ul class="benefits-list">
+            <li>✔ Te damos un espacio profesional equipado.</li>
+            <li>✔ Profesores expertos contratados por nosotros.</li>
+            <li>✔ Materiales completos incluidos.</li>
+            <li>✔ Acceso a contactos con empresas reales.</li>
+            <li>✔ Certificación al finalizar.</li>
+        </ul>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section">
+        <h2 class="title">Contacto</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Tu nombre" required />
+            <input type="email" placeholder="Correo electrónico" required />
+            <textarea placeholder="Tu mensaje" required></textarea>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
