@@ -16,6 +16,12 @@
                 <li><a href="#beneficios">Beneficios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
+            <div class="carrito">
+                <a href="#carrito" id="carrito-btn">
+                    <span>🛒</span>
+                    <span id="carrito-total">0</span>
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -32,17 +38,20 @@
     <section id="talleres" class="section">
         <h2 class="title">Nuestros Talleres</h2>
         <div class="cards-container">
-            <div class="card" data-target="detalle-edicion">
+            <div class="card">
                 <h3>Edición de Audio</h3>
                 <p>Aprende a manejar software profesional.</p>
+                <button class="agregar-plan" data-plan="Edición de Audio" data-price="150" data-description="Aprende a editar con herramientas profesionales. Incluye clases prácticas y teoría sobre técnicas de edición." data-includes="Software de edición, Clases prácticas y Teóricas, Asesoría personal">Ver detalles</button>
             </div>
-            <div class="card" data-target="detalle-conduccion">
+            <div class="card">
                 <h3>Conducción de Podcast</h3>
                 <p>Desarrolla habilidades de comunicación.</p>
+                <button class="agregar-plan" data-plan="Conducción de Podcast" data-price="225" data-description="Desarrolla tus habilidades de locución y comunicación. Incluye prácticas de voz y creación de contenido." data-includes="Entrenamiento vocal, Técnicas de comunicación, Creación de contenido">Ver detalles</button>
             </div>
-            <div class="card" data-target="detalle-produccion">
+            <div class="card">
                 <h3>Producción Completa</h3>
                 <p>Desde la idea hasta el producto final.</p>
+                <button class="agregar-plan" data-plan="Producción Completa" data-price="305.5" data-description="Aprende a gestionar el proyecto completo de producción de un podcast. Incluye desde la idea hasta la grabación y distribución." data-includes="Producción y grabación de audio, Estrategia de distribución, Publicación y promoción">Ver detalles</button>
             </div>
         </div>
     </section>
@@ -69,6 +78,28 @@
             <button type="submit" class="btn">Enviar</button>
         </form>
     </section>
+
+    <!-- Carrito Modal -->
+    <div id="carrito-modal" class="carrito-modal">
+        <div class="modal-contenido">
+            <h3>Tu Carrito</h3>
+            <div id="carrito-lista"></div>
+            <p>Total: S/ <span id="total-carrito">0</span></p>
+            <button id="pagar">Pagar</button>
+            <button id="cerrar-carrito">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Cuadro animado de detalles de plan -->
+    <div id="detalle-plan-modal" class="detalle-plan-modal">
+        <div class="detalle-plan-contenido">
+            <h3 id="detalle-plan-nombre"></h3>
+            <p><strong>Precio:</strong> S/ <span id="detalle-plan-precio"></span></p>
+            <p><strong>Descripción:</strong> <span id="detalle-plan-descripcion"></span></p>
+            <p><strong>Incluye:</strong> <span id="detalle-plan-includes"></span></p>
+            <button id="cerrar-detalle" class="btn-cerrar">Cerrar</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
