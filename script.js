@@ -1,65 +1,100 @@
-// ===== Scroll suave en la navegación =====
-const links = document.querySelectorAll('nav a');
+// Variables del carrito
+let carrito = [];
+let totalCarrito = 0;
 
-links.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const section = document.querySelector(link.getAttribute('href'));
-        section.scrollIntoView({ behavior: 'smooth' });
+// Función para actualizar el carrito
+function actualizarCarrito() {
+    const carritoLista = document.getElementById("carrito-lista");
+    const total = document.getElementById("total-carrito");
+    
+    carritoLista.innerHTML = '';  // Limpiar la lista del carrito
+
+    carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nombre} - $${item.precio}`;
+
+        // Crear el botón de eliminar
+        const eliminarBtn = document.createElement('button');
+        eliminarBtn.textContent = 'Eliminar';
+        eliminarBtn.addEventListener('click', () => eliminarDelCarrito(index));
+
+        li.appendChild(eliminarBtn);
+        carritoLista.appendChild(li);
     });
-});
 
-// ===== Mostrar detalles al hacer clic en tarjetas =====
-const cards = document.querySelectorAll('.card');
-
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        const target = card.getAttribute('data-target');
-        const detalle = document.getElementById(target);
-
-        // Ocultar otros detalles
-        document.querySelectorAll('.detalle').forEach(d => d.style.display = 'none');
-
-        // Mostrar el detalle correspondiente
-        if (detalle) detalle.style.display = 'block';
-
-        detalle.scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// ===== Animaciones al hacer scroll =====
-const elementos = document.querySelectorAll('.section, .card');
-
-function mostrarElementos() {
-    const trigger = window.innerHeight * 0.85;
-
-    elementos.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < trigger) {
-            el.classList.add('visible');
-        }
-    });
+    total.textContent = totalCarrito;
 }
 
-window.addEventListener('scroll', mostrarElementos);
-mostrarElementos();
+// Función para agregar un plan al carrito
+const botonesAgregar = document.querySelectorAll('.agregar-plan');
+botonesAgregar.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        const nombre = e.target.getAttribute('data-plan');
+        const precio = parseInt(e.target.getAttribute('data-price'));
+        const descripcion = e.target.getAttribute('data-description');
+        const incluye = e.target.getAttribute('data-includes');
 
-// ===== Botón flotante "Volver arriba" =====
-const btnArriba = document.createElement('div');
-btnArriba.id = "btnArriba";
-btnArriba.innerText = "↑";
-document.body.appendChild(btnArriba);
+        // Agregar el plan al carrito
+        carrito.push({ nombre, precio, descripcion, incluye });
+        totalCarrito += precio;
+        actualizarCarrito();
+        document.getElementById("carrito-total").textContent = carrito.length;
 
-btnArriba.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Mostrar el cuadro emergente con los detalles
+        document.getElementById("detalle-plan-nombre").textContent = nombre;
+        document.getElementById("detalle-plan-precio").textContent = precio;
+        document.getElementById("detalle-plan-descripcion").textContent = descripcion;
+        document.getElementById("detalle-plan-includes").textContent = incluye;
+
+        // Mostrar el modal con animación
+        document.getElementById("detalle-plan-modal").style.display = 'flex';
+    });
 });
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        btnArriba.style.opacity = '1';
-        btnArriba.style.pointerEvents = 'auto';
-    } else {
-        btnArriba.style.opacity = '0';
-        btnArriba.style.pointerEvents = 'none';
-    }
+// Función para eliminar un plan del carrito
+function eliminarDelCarrito(index) {
+    // Eliminar el plan del carrito
+    totalCarrito -= carrito[index].precio;
+    carrito.splice(index, 1);
+
+    // Actualizar el carrito visualmente
+    actualizarCarrito();
+
+    // Actualizar el número de elementos en el icono del carrito
+    document.getElementById("carrito-total").textContent = carrito.length;
+}
+
+// Cerrar el cuadro de detalles
+document.getElementById("cerrar-detalle").addEventListener('click', () => {
+    document.getElementById("detalle-plan-modal").style.display = 'none';
+});
+
+// Abrir el carrito
+document.getElementById("carrito-btn").addEventListener('click', () => {
+    document.getElementById("carrito-modal").style.display = 'flex';
+});
+
+// Cerrar el carrito
+document.getElementById("cerrar-carrito").addEventListener('click', () => {
+    document.getElementById("carrito-modal").style.display = 'none';
+});
+
+// Abrir el modal de pago
+document.getElementById("pagar").addEventListener('click', () => {
+    document.getElementById("pago-modal").style.display = 'flex';
+    document.getElementById("total-pago").textContent = totalCarrito;
+});
+
+// Cerrar el modal de pago
+document.getElementById("cerrar-pago").addEventListener('click', () => {
+    document.getElementById("pago-modal").style.display = 'none';
+});
+
+// Simulación de pago con los botones
+const botonesPago = document.querySelectorAll('.btn-pago');
+botonesPago.forEach(btn => {
+    btn.addEventListener('click', () => {
+        alert("¡Pago exitoso! (simulado)");
+        document.getElementById("pago-modal").style.display = 'none';
+    });
 });
